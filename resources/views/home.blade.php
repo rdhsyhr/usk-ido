@@ -9,7 +9,7 @@ $page = 'Home';
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" style="border-radius:15px">
-                    <div class="card-header" style="color: white;background-color: #5D73D5;font-weight:bold;font-size:20px;border-radius:10px">{{ __('Dashboard') }}
+                    <div class="card-header" style="color: black;background-color: #F9EFDB;font-weight:bold;font-size:20px;border-radius:10px">{{ __('Dashboard') }}
                     </div>
 
                     <div class="card-body">
@@ -20,67 +20,83 @@ $page = 'Home';
                         @endif
 
                         @if (Auth::user()->role_id === 1)
-                            <div class="row">
-                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #95B3ED">
-                                    <a href="{{ route('data_user') }}"
-                                        style="color: white;text-decoration:none;font-size:18px">User
-                                        List</a>
+
                                 </div>
-                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #95B3ED">
-                                    <a href="{{ route('data_transaksi') }}"
-                                        style="color: white;text-decoration:none;font-size:18px">Transaksi</a>
+                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #F9EFDB">
+                                    <a href="{{ route('transaksi_bank') }}"
+                                        style="color: black;text-decoration:none;font-size:18px">Transaksi</a>
                                 </div>
-                            </div>  
+
+                            </div>
                         @endif
-                        @if (Auth::user()->role_id === 4)
+                        @if (Auth::user()->role_id === 3)
                             <div class="row">
-                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #95B3ED">
+                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #F9EFDB">
                                     <a href="{{ route('topup') }}"
-                                        style="color: white;text-decoration:none;font-size:18px">Top Up</a>
+                                        style="color: black;text-decoration:none;font-size:18px">Top Up</a>
                                 </div>
-                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #95B3ED">
+                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #F9EFDB">
                                     <a href="{{ route('transaksi') }}"
-                                        style="color: white;text-decoration:none;font-size:18px">Canteen</a>
+                                        style="color: black;text-decoration:none;font-size:18px">Kantin</a>
                                 </div>
-                            </div>  
+                                <div class="card col" style="width: 100px; height: 100px; align-items:center; justify-content:center; margin:5px; background-color: #F9EFDB">
+                                    <a href="{{ route('tariktunai') }}"
+                                        style="color: black;text-decoration:none;font-size:18px">Tarik Tunai</a>
+                                </div>
+                            </div>
+
                         @endif
-                        @if (Auth::user()->role_id === 2)
+                        @if (Auth::user()->role_id === 1)
                             <table class="table table-bordered border-dark table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Nominal</th>
-                                        <th>Action</th>
+                                        <th>Action Top Up</th>
+                                        <th>Action Tarik Tunai</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @foreach ($pengajuans as $key => $pengajuan)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $pengajuan->user->name }}</td>
                                             <td>{{ $pengajuan->jumlah }}</td>
-                                            <td>
-                                                <a href="{{ route('topup.setuju', ['transaksi_id' => $pengajuan->id]) }}"
-                                                    class="btn btn-primary">
-                                                    Accept
-                                                </a>
-                                                <a href="{{ route('topup.tolak', ['transaksi_id' => $pengajuan->id]) }}"
-                                                    class="btn btn-danger">
-                                                    Decline
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        <td>
+                                            <a href="{{ route('topup.setuju', ['transaksi_id' => $pengajuan->id]) }}"
+                                                class="btn btn-primary">
+                                                Terima
+                                            </a>
+                                            <a href="{{ route('topup.tolak', ['transaksi_id' => $pengajuan->id]) }}"
+                                                class="btn btn-danger">
+                                                Tolak
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('tariktunai.setuju', ['transaksi_id' => $pengajuan->id]) }}"
+                                                class="btn btn-primary">
+                                                Terima
+                                            </a>
+                                            <a href="{{ route('tariktunai.tolak', ['transaksi_id' => $pengajuan->id]) }}"
+                                                class="btn btn-danger">
+                                                Tolak
+                                            </a>
+                                        </td>
+                                    <tr>
                                     @endforeach
+
                                 </tbody>
+
                             </table>
                         @endif
-                        @if (Auth::user()->role_id === 3)
+                        @if (Auth::user()->role_id === 2)
                             <table class="table table-bordered border-dark table-striped">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         {{-- <th>Nominal</th> --}}
                                         <th>Invoice ID</th>
                                         <th>Status</th>
@@ -123,7 +139,7 @@ $page = 'Home';
                                                                             <tr>
                                                                                 <th>No.</th>
                                                                                 <th>Menu</th>
-                                                                                <th>Qty</th>
+                                                                                <th>Kuantitas</th>
                                                                                 <th>Price</th>
                                                                                 <th>Total</th>
                                                                             </tr>

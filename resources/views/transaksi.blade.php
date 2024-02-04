@@ -14,7 +14,7 @@ $page = 'Jajan';
         <div class="row mb-3">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body" style="background-color: #8DA0F5">
+                    <div class="card-body" style="background-color: #EBD9B4">
                         <h5>Saldo: {{ $saldo->saldo }}</h5>
                     </div>
                 </div>
@@ -23,7 +23,7 @@ $page = 'Jajan';
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-header" style="background-color: #64B9F0; font-weight: bold; color: white">Menu</div>
+                    <div class="card-header" style="background-color: #F9EFDB; font-weight: bold; color: black">Menu</div>
                     <div class="card-body">
                         <div class="row">
                             @foreach ($barangs as $barang)
@@ -59,7 +59,7 @@ $page = 'Jajan';
         </div>
         <br/>
             <div class="card">
-                <div class="card-header" style="background-color: #64B9F0; font-weight: bold; color: white">keranjang {{ count($carts) > 0 ? '#' . $carts[0]->invoice_id : '' }}</div>
+                <div class="card-header" style="background-color: #F9EFDB; font-weight: bold; color: black">keranjang {{ count($carts) > 0 ? '#' . $carts[0]->invoice_id : '' }}</div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped" >
                         <thead>
@@ -67,7 +67,7 @@ $page = 'Jajan';
                                 <th>No.</th>
                                 <th>Barang</th>
                                 <th>Harga</th>
-                                <th>Qty</th>
+                                <th>Kuantitas</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -97,7 +97,7 @@ $page = 'Jajan';
         <br/>
             <div class="container">
                 <div class="card">
-                    <div class="card-header" style="background-color: #64B9F0; font-weight: bold; color: white">Checkout {{ count($carts) > 0 ? '#' . $carts[0]->invoice_id : '' }}</div>
+                    <div class="card-header" style="background-color: #F9EFDB; font-weight: bold; color: black">Checkout {{ count($carts) > 0 ? '#' . $carts[0]->invoice_id : '' }}</div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -105,7 +105,7 @@ $page = 'Jajan';
                                     <th>No.</th>
                                     <th>Barang</th>
                                     <th>Harga</th>
-                                    <th>Qty</th>
+                                    <th>Kuantitas</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>

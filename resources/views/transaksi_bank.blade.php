@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 <?php
-$page = 'Data Transaksi';
+$page = 'Transaksi Bank';
 ?>
 
 @section('content')
@@ -72,7 +72,9 @@ $page = 'Data Transaksi';
                                                                 Transaksi #{{ $transaksi->invoice_id }}</h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
+
                                                         </div>
+                                                        
                                                         <div class="modal-body">
                                                             User: {{ $transaksi->user->name }} <br />
                                                             Status:
@@ -91,40 +93,30 @@ $page = 'Data Transaksi';
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Order Name</th>
-                                                                        <th>Kuantitas</th>
-                                                                        <th>Harga</th>
-                                                                        <th>Amount</th>
+                                                                        <th>Jumlah</th>
+                                                                        <th>Jenis Transaksi</th>
+                                                                        <th>Saldo</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php $total_harga = 0; ?>
-                                                                    @foreach ($details as $detail)
-                                                                        @if ($detail->invoice_id == $transaksi->invoice_id)
-                                                                            <?php $total_harga += $detail->jumlah * $detail->barang->price; ?>
-                                                                            <tr>
-                                                                                <td>{{ $detail->barang->name }}</td>
-                                                                                <td>{{ $detail->jumlah }}</td>
-                                                                                <td>{{ $detail->barang->price }}</td>
-                                                                                <td>{{ $detail->jumlah * $detail->barang->price }}
-                                                                                </td>
-                                                                            </tr>
-                                                                        @endif
-                                                                    @endforeach
+                                                                    <tr>
+                                                                        <td>{{ number_format($transaksi->jumlah, 0, ',', '.') }}</td>
+                                                                        <td>@if (Str::startsWith($transaksi->invoice_id, 'SAL_'))
+                                                                            Topup
+                                                                            @else (Str::startsWith($transaksi->invoice_id, 'SAL_'))
+                                                                            Tarik Tunai
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>{{ number_format($transaksi->user->saldo->saldo, 0, ',', '.')}}</td>
+                                                                    </tr>
                                                                 </tbody>
                                                             </table>
-                                                            Total : {{ $total_harga }}
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Close</button>
-                                                                <div class="footer m-3">
-                        <button type="button" class="btn btn-primary" onclick="window.print()">
-                            PRINT
-                        </button>
-                    </div>
                                                         </div>
-                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,9 +128,11 @@ $page = 'Data Transaksi';
                     </div>
 
                     <div class="footer m-3">
+                        <a href="{{ route('home') }}" class="btn btn-primary">BERANDA</a>
                         <button type="button" class="btn btn-primary" onclick="window.print()">
                             PRINT
                         </button>
+
                     </div>
                 </div>
             </div>

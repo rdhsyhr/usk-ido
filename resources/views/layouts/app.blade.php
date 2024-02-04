@@ -23,10 +23,10 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #101C51">
+        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #EBD9B4">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" style="font-weight: bold; color: white">
-                    S-Wallet
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-weight: bold; color: black">
+                    CANTEEN 64
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -38,27 +38,45 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @auth
-                            @if (Auth::user()->role_id === 1)
-                                <li class="nav-item">
-                                    <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
-                                        href="{{ route('home') }}">Home</a>
-                                </li>
-                            @endif
-                            @if (Auth::user()->role_id === 4)
-                                <li class="nav-item">
-                                    <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
-                                        href="{{ route('home') }}">Home</a>
-                                </li>
-                            @endif
+
                             @if (Auth::user()->role_id === 3)
                                 <li class="nav-item">
                                     <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
-                                        href="{{ route('home') }}">Home</a>
+                                        href="{{ route('home') }}">Beranda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route('user_kantin') }}">Transaksi user kantin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route('user_bank') }}">Transaksi user bank</a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->role_id === 2)
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route('home') }}">Beranda</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ $page == 'Menu' ? 'active' : '' }}"
                                         href="{{ route('menu') }}">Menu</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $page == 'Menu' ? 'active' : '' }}"
+                                        href="{{ route('data_transaksi') }}">Data Transaksi</a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->role_id === 1)
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route('home') }}">Beranda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route('transaksi_bank') }}">Transaksi</a>
+                                </li>
+
                             @endif
                         @endauth
                     </ul>

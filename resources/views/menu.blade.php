@@ -14,9 +14,9 @@ $page = 'Menu';
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header" style="background-color: #64B9F0; font-weight: bold" >
+                    <div class="card-header" style="background-color: #F9EFDB; font-weight: bold" >
                         <div class="row">
-                            <div class="col" style="color: white" >
+                            <div class="col" style="color: black" >
                                 Menu
                             </div>
                             <div class="col d-flex justify-content-end">
@@ -80,9 +80,9 @@ $page = 'Menu';
                                     <th>No.</th>
                                     <th>Menu</th>
                                     <th>Gambar</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
+                                    <th>Deskripsi</th>
+                                    <th>Harga</th>
+                                    <th>Kuantitas</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
