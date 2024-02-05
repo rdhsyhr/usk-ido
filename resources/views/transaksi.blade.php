@@ -71,17 +71,20 @@ $page = 'Jajan';
                                 <th>Total</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($carts as $key => $cart)
-                                <tr >
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $cart->barang->name }}</td>
-                                    <td>{{ $cart->barang->price }}</td>
-                                    <td>{{ $cart->jumlah }}</td>
-                                    <td>{{ $cart->barang->price * $cart->jumlah }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                                       <tbody> @foreach ($carts as $key => $cart) <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $cart->barang->name }}</td>
+                        <td>{{ $cart->barang->price }}</td>
+                        <td>
+                            <form class="m-2" method="POST" action="{{ route('editCart', ['id' => $cart->id]) }}"> @csrf @method('PUT') <input type="number" name="jumlah" class="form-control" value="{{ $cart->jumlah }}"> <button class="btn btn-primary mt-2" type="submit">Edit</button> </form>
+                        </td>
+                        <td>{{ $cart->barang->price * $cart->jumlah }}</td>
+                        <td>
+                            <form class="m-2" method="POST" action="{{ route('deleteCart', ['id' => $cart->id]) }}"> @csrf @method('DELETE') <button class="btn btn-danger mt-2" type="submit">Delete from Cart</button> </form>
+                        </td>
+                    </tr> 
+                        @endforeach
+                </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="5">Total : {{ $total_cart }}</td>
