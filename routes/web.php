@@ -251,6 +251,42 @@ Route::post("addToCart/{id}", function (Request $request, $id) {
     }
 })->name("addToCart");
 
+Route::delete("cart/delete/{id}", function ($id) {
+    $transaksi = Transaksi::find($id);
+    $barang = $transaksi->barang;
+
+    // Add back the stock
+    $barang->update([
+        "stock" => $barang->stock + $transaksi->jumlah,
+    ]);
+
+    $transaksi->delete();
+
+    return redirect()->back()->with("status", "Success to Delete from Cart");
+})->name("deleteCart");
+
+Route::put("cart/edit/{id}", function (Request $request, $id) {
+    $transaksi = Transaksi::find($id);
+    $barang = $transaksi->barang;
+
+    // Check if there is enough stock
+    if ($barang->stock >= $request->jumlah) {
+        $transaksi->update([
+            "jumlah" => $request->jumlah,
+        ]);
+
+        // Update stok barang
+        $barang->update([
+            "stock" => $barang->stock - ($transaksi->jumlah - $request->jumlah),
+        ]);
+
+        return redirect()->back()->with("status", "Success to Edit from Cart");
+    } else {
+        return redirect()->back()->with("status", "Stok are not Enough");
+    }
+})->name("editCart");
+
+
 Route::get("checkout", function () {
     $invoice_id = "INV_" . Auth::user()->id . now()->timestamp;
 
